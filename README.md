@@ -8,7 +8,7 @@ This project runs once per day on Render and sends an SMS if a Gojo Satoru-relat
 2. Calls `https://fortnite-api.com/v2/shop/br`.
 3. Searches entries for `gojo satoru` / `gojo` (or your custom terms).
 4. Sends an SMS with Twilio **only** if there is at least one match.
-5. Uses your requested target number by default: **`+1 603-205-2315`**.
+5. Uses your requested target number by default: **`****`**.
 
 ## Environment variables
 
@@ -51,7 +51,7 @@ In Render service -> **Environment**, add:
 - `TWILIO_ACCOUNT_SID`
 - `TWILIO_AUTH_TOKEN`
 - `TWILIO_FROM_PHONE`
-- Optional: `TARGET_PHONE` (only if you want to override `+16032052315`)
+- Optional: `TARGET_PHONE` (only if you want to override `****`)
 - Optional: `SEARCH_TERMS`
 - Optional: `LOG_LEVEL`
 
