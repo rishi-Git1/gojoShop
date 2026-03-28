@@ -8,7 +8,6 @@ from twilio.rest import Client
 
 SHOP_URL = "https://fortnite-api.com/v2/shop/br"
 DEFAULT_SEARCH_TERMS = ["gojo satoru", "gojo"]
-DEFAULT_TARGET_PHONE = "+16032052315"
 
 
 logging.basicConfig(
@@ -67,7 +66,7 @@ def send_sms(message: str) -> None:
     account_sid = os.getenv("TWILIO_ACCOUNT_SID")
     auth_token = os.getenv("TWILIO_AUTH_TOKEN")
     from_phone = os.getenv("TWILIO_FROM_PHONE")
-    to_phone = os.getenv("TARGET_PHONE", DEFAULT_TARGET_PHONE)
+    to_phone = os.getenv("TARGET_PHONE")
 
     missing = [
         key
@@ -75,6 +74,7 @@ def send_sms(message: str) -> None:
             "TWILIO_ACCOUNT_SID": account_sid,
             "TWILIO_AUTH_TOKEN": auth_token,
             "TWILIO_FROM_PHONE": from_phone,
+            "TARGET_PHONE": to_phone,
         }.items()
         if not value
     ]
@@ -83,7 +83,7 @@ def send_sms(message: str) -> None:
 
     client = Client(account_sid, auth_token)
     result = client.messages.create(body=message, from_=from_phone, to=to_phone)
-    logger.info("SMS sent to %s with SID %s", to_phone, result.sid)
+    logger.info("SMS sent to target number with SID %s", result.sid)
 
 
 def build_message(matches: list[dict], shop_data: dict) -> str:
